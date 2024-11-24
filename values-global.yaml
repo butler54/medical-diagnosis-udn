@@ -1,5 +1,5 @@
 global:
-  pattern: xray
+  pattern: medical-diagnosis-udn
 
   options:
     useCSV: False
@@ -7,11 +7,11 @@ global:
     installPlanApproval: Automatic
 
   datacenter:
-    cloudProvider: PROVIDE_CLOUDPROVIDER
-    storageClassName: PROVIDE_STORAGECLASS_NAME
-    region: PROVIDE_REGION
-    clustername: PROVIDE_CLUSTERNAME
-    domain: PROVIDE_DOMAIN
+    cloudProvider: AWS
+    storageClassName: gp3-csi
+    region: ap-southeast-1
+    clustername: networker
+    domain: sandbox373.opentlc.com
 
   xraylab:
     namespace: "xraylab-1"
@@ -19,7 +19,7 @@ global:
     s3:
       # Values for S3 bucket access
       # bucketSource: "provide s3 bucket name where images are stored"
-      bucketSource: PROVIDE_BUCKETSOURCE
+      bucketSource: "https://s3.ap-southeast-1.amazonaws.com/medical-diagnosis-udn"
       # Bucket base name used for image-generator and image-server applications.
       bucketBaseName: "xray-source"
 
@@ -28,8 +28,7 @@ main:
   multiSourceConfig:
     enabled: true
     clusterGroupChartVersion: 0.9.*
-
-# Example Configuration
+  # Example Configuration
   #datacenter:
   #  cloudProvider: aws
   #  storageClassName: gp2
