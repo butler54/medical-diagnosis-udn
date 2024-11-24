@@ -1,0 +1,6 @@
+apiVersion: v2
+description: Updates an OCP cluster config to enable all tech preview features.
+keywords:
+- pattern
+name: techpreview
+version: 0.0.1
