@@ -13,4 +13,4 @@ awssecret:
 # bucket region 
 s3:
   region: ap-southeast-1
-  bucket: backup-t5qrc
+  bucket: loki-netobserv
