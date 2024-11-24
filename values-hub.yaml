@@ -55,6 +55,11 @@ clusterGroup:
       name: netobserv-operator
       channel: stable
 
+    cnv:
+      name: kubevirt-hyperconverged
+      namespace: openshift-cnv
+      channel: stable
+
   projects:
   - hub
   - medical-diagnosis
@@ -63,6 +68,7 @@ clusterGroup:
   - prod
   - dev
   - networks
+  - cnv
 
   sharedValueFiles:
   - '/overrides/values-{{ $.Values.global.clusterPlatform }}.yaml'
@@ -177,6 +183,11 @@ clusterGroup:
       project: hub
       path: charts/all/techpreview
 
+    cnv:
+      name: cnv
+      namespace: openshift-cnv
+      project: cnv
+      path: charts/all/cnv
   imperative:
     # NOTE: We *must* use lists and not hashes. As hashes lose ordering once parsed by helm
     # The default schedule is every 10 minutes: imperative.schedule
