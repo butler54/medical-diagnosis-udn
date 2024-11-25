@@ -21,6 +21,7 @@ clusterGroup:
   - layertwo
   - openshift-netobserv-operator
   - openshift-cnv
+  - openshift-nmstate
   subscriptions:
     acm:
       name: advanced-cluster-management
@@ -58,6 +59,11 @@ clusterGroup:
     cnv:
       name: kubevirt-hyperconverged
       namespace: openshift-cnv
+      channel: stable
+
+    openshift-nmstate:
+      name: kubernetes-nmstate-operator
+      namespace: openshift-nmstate
       channel: stable
 
   projects:
@@ -178,11 +184,12 @@ clusterGroup:
       project: hub
       path: charts/all/networks
 
-    techpreview:
-      name: techpreview
-      namespace: default
-      project: hub
-      path: charts/all/techpreview
+    # Best to do this by hand first
+    # techpreview:
+    #   name: techpreview
+    #   namespace: default
+    #   project: hub
+    #   path: charts/all/techpreview
 
     cnv:
       name: cnv

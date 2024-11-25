@@ -1,3 +1,36 @@
+# medical-diagnosis + UDN demo
+A hodgepodge demo to stress various elements of a cluster
+
+## WARNING ** SIZING AND TECH PREVIEW FEATURES **
+A strict order of operations is required to get this to boot.
+  
+1. Install a cluster. Make sure you have metal nodes available if in AWS.
+   1. Control plane on AWS `m5.4xlarge` or larger are known to work
+   2. Use `m5.metal` on aws 
+2. Ensure you are on 4.17 - Note that `openshift-installer` increments per release. Download the latest to avoid upgrades.
+3. First enable the featuregate to enable UDNs
+  ```
+  apiVersion: config.openshift.io/v1
+  kind: FeatureGate
+  metadata:
+    name: cluster
+  spec:
+    featureSet: TechPreviewNoUpgrade
+  ```
+4. Install the validated pattern.
+
+This is primarily as with odf layered into the environment there are more constrains on updates which make your life painful.
+
+
+
+
+
+
+
+
+
+# See below for baseline information
+
 # Medical Diagnosis Validated Pattern
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
