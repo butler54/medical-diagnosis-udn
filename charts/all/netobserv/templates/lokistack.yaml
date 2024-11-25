@@ -4,7 +4,7 @@ metadata:
   name: loki
   namespace: netobserv 
 spec:
-  size: 1x.extra-small
+  size: 1x.small
   storage:
     schemas:
     - version: v12
