@@ -1,0 +1,150 @@
+apiVersion: flows.netobserv.io/v1beta2
+kind: FlowCollector
+metadata:
+  name: cluster
+spec:
+  networkPolicy:
+    additionalNamespaces:
+      - openshift-console
+      - openshift-monitoring
+  loki:
+    advanced:
+      writeMaxBackoff: 5s
+      writeMaxRetries: 2
+      writeMinBackoff: 1s
+    writeTimeout: 10s
+    microservices:
+      ingesterUrl: 'http://loki-distributor:3100/'
+      querierUrl: 'http://loki-query-frontend:3100/'
+      tenantID: netobserv
+      tls:
+        enable: false
+        insecureSkipVerify: false
+    enable: true
+    mode: LokiStack
+    manual:
+      authToken: Disabled
+      ingesterUrl: 'http://loki:3100/'
+      querierUrl: 'http://loki:3100/'
+      statusTls:
+        enable: false
+        insecureSkipVerify: false
+      tenantID: netobserv
+      tls:
+        enable: false
+        insecureSkipVerify: false
+    lokiStack:
+      name: loki
+    readTimeout: 30s
+    monolithic:
+      tenantID: netobserv
+      tls:
+        enable: false
+        insecureSkipVerify: false
+      url: 'http://loki:3100/'
+    writeBatchWait: 1s
+    writeBatchSize: 10485760
+  deploymentModel: Direct
+  agent:
+    ebpf:
+      logLevel: info
+      metrics:
+        server:
+          tls:
+            insecureSkipVerify: false
+            type: Disabled
+      cacheMaxFlows: 100000
+      sampling: 1
+      imagePullPolicy: IfNotPresent
+      excludeInterfaces:
+        - lo
+      kafkaBatchSize: 1048576
+      cacheActiveTimeout: 5s
+      features:
+        - PacketDrop
+        - DNSTracking
+        - FlowRTT
+        - NetworkEvents
+      privileged: true
+    ipfix:
+      cacheActiveTimeout: 20s
+      cacheMaxFlows: 400
+      clusterNetworkOperator:
+        namespace: openshift-network-operator
+      forceSampleAll: false
+      ovnKubernetes:
+        containerName: ovnkube-node
+        daemonSetName: ovnkube-node
+        namespace: ovn-kubernetes
+      sampling: 400
+    type: eBPF
+  kafka:
+    sasl:
+      type: Disabled
+    tls:
+      enable: false
+      insecureSkipVerify: false
+  prometheus:
+    querier:
+      manual:
+        tls:
+          enable: false
+          insecureSkipVerify: false
+        url: 'http://prometheus:9090'
+      mode: Auto
+      timeout: 30s
+  consolePlugin:
+    logLevel: info
+    advanced:
+      port: 9001
+      register: true
+    enable: true
+    portNaming:
+      enable: true
+    quickFilters:
+      - default: true
+        filter:
+          flow_layer: '"app"'
+        name: Applications
+      - filter:
+          flow_layer: '"infra"'
+        name: Infrastructure
+      - default: true
+        filter:
+          dst_kind: '"Pod"'
+          src_kind: '"Pod"'
+        name: Pods network
+      - filter:
+          dst_kind: '"Service"'
+        name: Services network
+    imagePullPolicy: IfNotPresent
+    autoscaler:
+      maxReplicas: 3
+      status: Disabled
+    replicas: 1
+  processor:
+    logLevel: info
+    advanced:
+      port: 2055
+      conversationTerminatingTimeout: 5s
+      conversationEndTimeout: 10s
+      profilePort: 6060
+      enableKubeProbes: true
+      healthPort: 8080
+      dropUnusedFields: true
+      conversationHeartbeatInterval: 30s
+    metrics:
+      server:
+        tls:
+          insecureSkipVerify: false
+          type: Disabled
+    multiClusterDeployment: false
+    kafkaConsumerQueueCapacity: 1000
+    imagePullPolicy: IfNotPresent
+    kafkaConsumerAutoscaler:
+      maxReplicas: 3
+      status: Disabled
+    logTypes: Flows
+    kafkaConsumerReplicas: 3
+    kafkaConsumerBatchSize: 10485760
+  namespace: netobserv
