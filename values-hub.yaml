@@ -108,6 +108,13 @@ clusterGroup:
       chart: golang-external-secrets
       chartVersion: 0.1.*
 
+    virt:
+      name: openshift-virtualization-instance
+      namespace: openshift-cnv
+      project: hub
+      chart: openshift-virtualization-instance
+      chartVersion: 0.1.*
+
     openshift-data-foundations:
       name: odf
       namespace: openshift-storage
