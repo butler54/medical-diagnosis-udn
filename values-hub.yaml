@@ -22,6 +22,7 @@ clusterGroup:
   - openshift-netobserv-operator
   - openshift-cnv
   - openshift-nmstate
+  - netobserv
   subscriptions:
     acm:
       name: advanced-cluster-management
@@ -183,6 +184,12 @@ clusterGroup:
       namespace: networks
       project: hub
       path: charts/all/networks
+
+    netobserv:
+      name: netobserv
+      namespace: netobserv
+      project: networks
+      path: charts/all/netobserv
 
     # Best to do this by hand first
     # techpreview:
