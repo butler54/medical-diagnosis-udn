@@ -20,7 +20,7 @@ clusterGroup:
   - dev
   - layertwo
   - openshift-netobserv-operator
-
+  - openshift-cnv
   subscriptions:
     acm:
       name: advanced-cluster-management
@@ -69,6 +69,7 @@ clusterGroup:
   - dev
   - networks
   - cnv
+  - layertwo
 
   sharedValueFiles:
   - '/overrides/values-{{ $.Values.global.clusterPlatform }}.yaml'
@@ -188,6 +189,12 @@ clusterGroup:
       namespace: openshift-cnv
       project: cnv
       path: charts/all/cnv
+
+    vms:
+      name: layertwo
+      namespace: layertwo
+      project: layertwo
+      path: charts/all/layertwo
   imperative:
     # NOTE: We *must* use lists and not hashes. As hashes lose ordering once parsed by helm
     # The default schedule is every 10 minutes: imperative.schedule
