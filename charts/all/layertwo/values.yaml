@@ -11,6 +11,3 @@ awssecret:
   key: secret/data/global/aws
 
 # bucket region 
-s3:
-  region: ap-southeast-1
-  bucket: backup-t5qrc
