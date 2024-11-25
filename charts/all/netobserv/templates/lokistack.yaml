@@ -12,6 +12,6 @@ spec:
     secret:
       name: loki-s3
       type: s3
-  storageClassName: gp3 
+  storageClassName: gp3-csi
   tenants:
     mode: openshift-network
