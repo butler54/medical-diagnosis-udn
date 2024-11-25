@@ -5,8 +5,8 @@ A hodgepodge demo to stress various elements of a cluster
 A strict order of operations is required to get this to boot.
   
 1. Install a cluster. Make sure you have metal nodes available if in AWS.
-   1. Control plane on AWS `m5.4xlarge` or larger are known to work
-   2. Use `m5.metal` on aws 
+   1. Control plane on AWS `m5.4xlarge` or larger are known to work (most likely `m5.2xlarge` are sufficient)
+   2. Use `m5.metal` on aws for virt control plane.
 2. Ensure you are on 4.17 - Note that `openshift-installer` increments per release. Download the latest to avoid upgrades.
 3. First enable the featuregate to enable UDNs
   ```
@@ -17,10 +17,22 @@ A strict order of operations is required to get this to boot.
   spec:
     featureSet: TechPreviewNoUpgrade
   ```
+1. Enable multi-network policy 
+   1. Do so in the UI -> Network -> Network policies.
+
+2. Buckets: 
+   1. Buckets are global and therefore not necessarily reproduceable. Currently creating by hand and update config
+      1. One bucket for loki
+      2. Another for the xrays
+3. Update `values-global.yaml` including:
+   1. `global.datacenter.region`
+   2. `global.datacenter.clustername`
+   3. `global.datacenter.domain`
+   4. `global.xraylab.s3.bucketsource`
+
 4. Install the validated pattern.
 
 This is primarily as with odf layered into the environment there are more constrains on updates which make your life painful.
-
 
 
 

@@ -1,11 +1,11 @@
-apiVersion: k8s.ovn.org/v1
-kind: UserDefinedNetwork
-metadata:
-  name: layertwo-primary-udn
-  namespace: layertwo
-spec:
-  topology: Layer2 
-  layer2: 
-    role: Primary 
-    subnets:
-      - "10.160.0.0/16"
+# apiVersion: k8s.ovn.org/v1
+# kind: UserDefinedNetwork
+# metadata:
+#   name: layertwo-primary-udn
+#   namespace: layertwo
+# spec:
+#   topology: Layer2 
+#   layer2: 
+#     role: Primary 
+#     subnets:
+#       - "10.160.0.0/16"
