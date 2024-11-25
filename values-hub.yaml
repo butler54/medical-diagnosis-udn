@@ -198,12 +198,6 @@ clusterGroup:
     #   project: hub
     #   path: charts/all/techpreview
 
-    cnv:
-      name: cnv
-      namespace: openshift-cnv
-      project: cnv
-      path: charts/all/cnv
-
     vms:
       name: layertwo
       namespace: layertwo
